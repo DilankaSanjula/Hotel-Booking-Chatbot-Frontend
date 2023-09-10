@@ -9,10 +9,6 @@ for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
 if prompt := st.chat_input():
-    #st.write(f"User has sent the following prompt: {prompt}")
-    # if not openai_api_key:
-    #     st.info("Please add your OpenAI API key to continue.")
-    #     st.stop()
 
     # openai.api_key = openai_api_key
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -21,4 +17,5 @@ if prompt := st.chat_input():
     # msg = response.choices[0].message
     msg = "testss"
     st.session_state.messages.append(msg)
-    st.chat_message("assistant").write(msg.content)
+    #st.chat_message("assistant").write(msg.content)
+    st.chat_message("assistant").write(msg)
