@@ -1,30 +1,23 @@
 import streamlit as st
 
-# with st.chat_message("user"):
-#     st.write("Hello from ABC Hotels , How can I help you?")
+st.title("💬 Chatbot")
 
-# if "messages" not in st.session_state:
-#     st.session_state["messages"] = [{"role": "assistant", "content": "Hello from ABC Hotels , How can I help you?"}]
+if "messages" not in st.session_state:
+    st.session_state["messages"] = [{"role": "assistant", "content": "Hello from ABC Hotels , How can I help you?"}]
 
-chat_history = []
+for msg in st.session_state.messages:
+    st.chat_message(msg["role"]).write(msg["content"])
 
-# Create a Streamlit text input widget for user messages
-user_message = st.text_input("User's Message", "")
+if prompt := st.chat_input():
+    st.write(f"User has sent the following prompt: {prompt}")
+    # if not openai_api_key:
+    #     st.info("Please add your OpenAI API key to continue.")
+    #     st.stop()
 
-# Function to simulate the bot's response
-def bot_response(user_message):
-    user_message = "test response from bot"
-    return f"Bot: {user_message}"
-
-# Handle user input and bot responses
-if st.button("Send"):
-    if user_message:
-        chat_history.append(f"User: {user_message}")
-        bot_reply = bot_response(user_message)
-        chat_history.append(bot_reply)
-        user_message = ""
-
-# Display the chat history
-st.title("ABC Hotel Chat UI")
-for message in chat_history:
-    st.write(message)
+    # openai.api_key = openai_api_key
+    # st.session_state.messages.append({"role": "user", "content": prompt})
+    # st.chat_message("user").write(prompt)
+    # response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=st.session_state.messages)
+    # msg = response.choices[0].message
+    # st.session_state.messages.append(msg)
+    # st.chat_message("assistant").write(msg.content)
