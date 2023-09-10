@@ -3,19 +3,22 @@ import streamlit as st
 st.title("💬 Chatbot")
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "Hello from ABC Hotels , How can I help you?"}]
+    st.session_state.messages = []
+    
+for message in st.session_state.messages:
+    with st.chat(message["role"]):
+        st.markdown(message["content"])
 
-for msg in st.session_state.messages:
-    st.chat_message(msg["role"]).write(msg["content"])
 
 if prompt := st.chat_input():
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
-    # openai.api_key = openai_api_key
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
-    # response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=st.session_state.messages)
-    # msg = response.choices[0].message
-    msg = "testss"
-    st.session_state.messages.append(msg)
-    #st.chat_message("assistant").write(msg.content)
-    st.chat_message("assistant").write(msg)
+    response = f"Jetwing: {prompt}"
+
+    with st.chat_message("user"):
+        st.markdown(response)
+
+    st.session_state.messages.append({"role": "user", "assistant": response})
