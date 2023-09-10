@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("💬 Chatbot")
+st.title("ABC Hotel Chatbot")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -15,10 +15,10 @@ if prompt := st.chat_input():
         st.markdown(prompt)
 
     st.session_state.messages.append({"role": "user", "content": prompt})
-    st.chat_message("user").write(prompt)
+
     response = f"Jetwing: {prompt}"
 
-    with st.chat_message("user"):
+    with st.chat_message("assistant"):
         st.markdown(response)
 
     st.session_state.messages.append({"role": "user", "assistant": response})
