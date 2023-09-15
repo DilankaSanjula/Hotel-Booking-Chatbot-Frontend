@@ -19,7 +19,7 @@ class Metrics:
 
 metrics = Metrics()
 
-api_url = "http://localhost:5005/webhooks/rest/webhook"
+api_url = "http://44.208.57.126:5005/webhooks/rest/webhook"
 
 # Check for existing messages in the session state and initialize if not found
 if "messages" not in st.session_state:
